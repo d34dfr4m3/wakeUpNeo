@@ -1,6 +1,8 @@
-#### wakeUpNeo
+## wakeUpNeo
 Com a necessidade de ligar os servidores da minha rede local quando eu não estiver na minha rede local, decidi codar algo para me ajudar com isso. 
+
 O script bem simples, ele atualiza as tabela arp disparando ping no range da rede de forma primitiva, então analisa a tabela arp, caso não encontrar o MAC do host que será ligado, significa que o host não está ligado, então dispara o pacote. 
+
 Importante lembrar que o script parte do ponto que o Wake On lan já está habilitado no host, caso não tenha configurado, tente seguir esse post explicando como [Configurar o wake on lan](http://diesec.sytes.net/configurando-wake-on-lan/)
 
 ##### Dependencias.
