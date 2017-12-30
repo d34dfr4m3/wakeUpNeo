@@ -33,7 +33,6 @@ then
 	source ./config
 	if [ -n "$TARGETS" ] 
 	then
-		echo $TARGETS
 		echo "[*] Updating the arp tables"
 		updatearp
 		sleep 2
