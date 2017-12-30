@@ -1,6 +1,6 @@
 #!/bin/bash
 function updatearp(){
-	if [ -n "NETWORK" ]
+	if [ -n "$NETWORK" ]
 	then
 		for SUFIX in {1..254}
 		do 
@@ -33,7 +33,7 @@ then
 	source ./config
 	if [ -n "$TARGETS" ] 
 	then
-		echo "[*] Updating the arp tables"
+		echo "[*] Updating the arp table"
 		updatearp
 		sleep 2
 		for LINE in $TARGETS
