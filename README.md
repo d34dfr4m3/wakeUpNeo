@@ -33,7 +33,7 @@ O Script vai carregar as configurações a partir de um arquivo conf, nesse prim
 		./wakeupneo -u -> Não atualiza a tabela arp e dispara para todos os hosts. 
 		./wakeupneo -u -H host0 -> Não atualiza a tabela e dispara para o host0 especificado.
 ```
-
+##### Blabla
 O script por hora só trabalha com a redes /24, na real nem sei porque codei tudo isso, foi mais pra eliminar o tédio, então, troque o prefixo e defina os targets e execute. 
 
 Eu ia colocar uma outra função para que o script avise quando o host ligar e pegar um IPv4 na LAN mas o script iria ficar processando até os sistemas ligar e subir na rede, então sei lá, não acho necessário pro meu problema. 
