@@ -8,12 +8,30 @@ Importante lembrar que o script parte do ponto que o Wake On lan já está habil
 ##### Dependencias.
  - wakeonlan
 
-##### Configuração
+##### Configuração.
 O Script vai carregar as configurações a partir de um arquivo conf, nesse primeiro prototipo funcional, só é necessário o prefixo da rede e os MAC's quais desejam ser inicializados separdos por espaço, segue exemplo:
 
 ```
-  NETWORK=10.10.10
-  TARGETS="00:00:00:00:00:00 00:00:00:00:00:00 00:00:00:00:00:00 00:00:00:00:00:00 00:00:00:00:00:00"
+	## Network Area
+	NETWORK=10.10.0
+
+	## Hosts Area
+	host0=00:00:00:00:00:00
+	host1=00:00:00:00:00:00
+	host2=00:00:00:00:00:00
+
+```
+##### Execução.
+```
+	 Usage: ./wakeupneo {-options} 
+		-u -> Do no check with hosts are online
+		-H -> Define the host to send the magic packet, the host must exist in the config file
+		
+		Without options the script will check with the hosts are online and wake up all"
+	Exemplos:
+		./wakeupneo -> Vai atualizar a tabela arp disparando ping para a $NETWORK na máscara /24 e então disparar os pacotes para todos os hosts configurados no config.
+		./wakeupneo -u -> Não atualiza a tabela arp e dispara para todos os hosts. 
+		./wakeupneo -u -H host0 -> Não atualiza a tabela e dispara para o host0 especificado.
 ```
 
 O script por hora só trabalha com a redes /24, na real nem sei porque codei tudo isso, foi mais pra eliminar o tédio, então, troque o prefixo e defina os targets e execute. 

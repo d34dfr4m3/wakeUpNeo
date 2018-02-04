@@ -1,4 +1,5 @@
 #!/bin/bash
+#######################################- FUNCTIONS -###################################
 function updatearp(){
 	if [ -n "$NETWORK" ]
 	then
@@ -27,16 +28,49 @@ function wakeup(){
 	wakeonlan $1
 
 }
+
+function usage(){
+	echo " Usage: $0 {options} 
+		-u -> Do no check with hosts are online
+		-H -> Define the host to send the magic packet, the host must exist in the config file
+		
+		Without options the script will check with the hosts are online and wake up all"
+	exit 0
+	
+}
+#######################################- MAIN -#####################################
+UPDATEARP=true
+while getopts "uH:" OPT
+do
+	case $OPT in
+		u)
+			UPDATEARP=false
+		;;
+		
+		H) 	wakeup `grep ${OPTARG} config | cut -d '=' -f 2 ` 
+			exit 0
+		;;
+		
+		*) 	echo "[*] Usage Error"
+			usage
+		;;
+	esac
+done
+
 if [ -f ./config ]
 then
 	echo "[-] Loading the configs"
 	source ./config
+	TARGETS=`sed  '0,/Hosts/ d' config | cut -d '=' -f 1`
 	if [ -n "$TARGETS" ] 
 	then
-		echo "[*] Updating the arp table"
-		updatearp
-		sleep 2
-		for LINE in $TARGETS
+		if [ !  $UPDATEARP == 'false' ]
+		then	
+			echo "[*] Updating the arp table"
+			updatearp
+			sleep 2
+		fi
+		for LINE in `for x in $TARGETS; do grep $x config | cut -d '=' -f 2; done`
 			do
 				UP=$(checkifup $LINE)
 				if [ $UP == 'off' ]
